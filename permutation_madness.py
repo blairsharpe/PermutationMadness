@@ -1,5 +1,5 @@
 
-def spin():
+def spin(move):
     """Example function with types documented in the docstring.
 
     `PEP 484`_ type annotations are supported. If attribute, parameter, and
@@ -12,9 +12,13 @@ def spin():
         bool: The return value. True for success, False otherwise.
 
     """
-    pass
+    program_index = move[1:]
 
-def exchange():
+    print("spin")
+    print(program_index)
+
+
+def exchange(move):
     """Example function with types documented in the docstring.
 
     `PEP 484`_ type annotations are supported. If attribute, parameter, and
@@ -27,11 +31,13 @@ def exchange():
         bool: The return value. True for success, False otherwise.
 
     """
+    program_one, program_two = tuple(move[1:].split("/"))
 
-    pass
+    print(program_one, program_two)
+    print("exchange")
 
-def partner():
-     """Example function with types documented in the docstring.
+def partner(move):
+    """Example function with types documented in the docstring.
 
     `PEP 484`_ type annotations are supported. If attribute, parameter, and
 
@@ -43,7 +49,10 @@ def partner():
         bool: The return value. True for success, False otherwise.
 
     """
-    pass
+    program_one, program_two = tuple(move[1:].split("/"))
+
+    print(program_one, program_two)
+    print("partner")
 
 if __name__ == "__main__":
 
@@ -57,7 +66,36 @@ if __name__ == "__main__":
     for move in moves:
 
         step += 1
-        print("{}. {}".format(step, move))
+        print("\n{}. {}".format(step, move))
+
+        if move[0] == 'p':
+            partner(move)
+
+        elif move[0] == 's':
+            spin(move)
+
+        else:
+            exchange(move)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
