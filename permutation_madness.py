@@ -16,6 +16,7 @@ def spin(move, programs):
 
     return split_programs
 
+
 def exchange(move, programs):
     """Exchange causes two programs to swap depending on two numbers given
 
@@ -24,30 +25,42 @@ def exchange(move, programs):
     programs (str): Programs in their current order
     """
     program_one, program_two = tuple(move[1:].split("/"))
-    print(program_one, program_two)
+
     programs = list(programs)
+
     programs[int(program_two)], programs[int(program_one)] = \
-            programs[int(program_one)], programs[int(program_two)]
+        programs[int(program_one)], programs[int(program_two)]
 
     return "".join(programs)
 
-def partner(move, programs):
+
+def partner(move, programs, original):
     """Example function with types documented in the docstring.
     Args:
         move (str): The amount of programs to move
     programs (str): Programs in their current order
     """
-    program_one, program_two = tuple(move[1:].split("/"))
+    index_one, index_two = tuple(move[1:].split("/"))
 
-    print(program_one, program_two)
-    print("partner")
+    # Given the index, find programs in the original program list
+    program_one, program_two = original[int(index_one)],\
+        original[int(index_two)]
 
-    return True
+    programs = list(programs)
+
+    index_one, index_two = programs.index(program_one), \
+        programs.index(program_two)
+
+    programs[index_one], programs[index_two] = programs[index_two], \
+        programs[index_one]
+
+    return "".join(programs)
 
 
 if __name__ == "__main__":
 
     programs = "abcde"
+    original = programs
     moves = "s1,x3/4,p4/1"
 
     moves = moves.split(",")
@@ -60,7 +73,9 @@ if __name__ == "__main__":
         print("\n{}. {}".format(step, move))
 
         if move[0] == 'p':
-            partner(move, programs)
+            programs = partner(move, programs, original)
+
+            print(programs)
 
         elif move[0] == 's':
             programs = spin(move, programs)
@@ -69,4 +84,3 @@ if __name__ == "__main__":
         else:
             programs = exchange(move, programs)
             print(programs)
-
